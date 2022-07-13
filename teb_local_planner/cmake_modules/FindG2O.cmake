@@ -62,18 +62,36 @@ IF(UNIX)
     NAMES g2o_csparse_extension g2o_csparse_extension_rd
     PATHS /usr/local /usr ${CMAKE_PREFIX_PATH}
     PATH_SUFFIXES lib)
-
-  SET(G2O_LIBRARIES ${G2O_CSPARSE_EXTENSION_LIB}
-                    ${G2O_CORE_LIB}           
-                    ${G2O_STUFF_LIB}          
-                    ${G2O_TYPES_SLAM2D_LIB}   
+   FIND_LIBRARY(G2O_OPENGL_HELPER_LIB
+    NAMES g2o_opengl_helper g2o_opengl_helper_rd
+    PATHS /usr/local /usr ${CMAKE_PREFIX_PATH}
+    PATH_SUFFIXES lib)
+    FIND_LIBRARY(G2O_INTERACTIVE_LIB
+    NAMES g2o_interactive g2o_interactive_rd
+    PATHS /usr/local /usr ${CMAKE_PREFIX_PATH}
+    PATH_SUFFIXES lib)
+    FIND_LIBRARY(G2O_INTERFACE_LIB
+    NAMES g2o_interface g2o_interface_rd
+    PATHS /usr/local /usr ${CMAKE_PREFIX_PATH}
+    PATH_SUFFIXES lib)
+    FIND_LIBRARY(G2O_PARSER_LIB
+    NAMES g2o_parser g2o_parser_rd
+    PATHS /usr/local /usr ${CMAKE_PREFIX_PATH}
+    PATH_SUFFIXES lib)
+ 
+   SET(G2O_LIBRARIES ${G2O_CSPARSE_EXTENSION_LIB}
+                     ${G2O_CORE_LIB}           
+                     ${G2O_STUFF_LIB}          
+                     ${G2O_TYPES_SLAM2D_LIB}   
                     ${G2O_TYPES_SLAM3D_LIB}   
                     ${G2O_SOLVER_CHOLMOD_LIB} 
                     ${G2O_SOLVER_PCG_LIB}     
                     ${G2O_SOLVER_CSPARSE_LIB} 
-                    ${G2O_INCREMENTAL_LIB}                        
-                    )
-
+                    ${G2O_INCREMENTAL_LIB}
+		    ${G2O_OPENGL_HELPER_LIB}                        
+                    ${G2O_INTERACTIVE_LIB} 
+		    ${G2O_INTERFACE_LIB} 
+		    ${G2O_PARSER_LIB})
   IF(G2O_LIBRARIES AND G2O_INCLUDE_DIR)
     SET(G2O_FOUND "YES")
     IF(NOT G2O_FIND_QUIETLY)
